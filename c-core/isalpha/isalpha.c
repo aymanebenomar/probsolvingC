@@ -1,4 +1,4 @@
-int	isalpha(int c)
+int	gm_isalpha(int c)
 {
 	unsigned char check = (unsigned char)c;
 	if ((check >= 'a' && check <= 'z') || (check >= 'A' && check <= 'Z'))
