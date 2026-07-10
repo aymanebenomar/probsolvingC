@@ -1,4 +1,4 @@
-int	isprint(int c)
+int	gm_isprint(int c)
 {
 	if ((c >= 0 && c <= 31) || (c == 127))
 		return 0;
