@@ -1,4 +1,4 @@
-int atoi(const char *str)
+int gm_atoi(const char *str)
 {
 	int i = 0;
 	int result = 0;
@@ -24,8 +24,8 @@ int atoi(const char *str)
 /* #include <stdio.h>
 int main(void)
 {
-	printf("%d\n", atoi(" +7"));
-	printf("%d\n", atoi("-300"));
-	printf("%d\n", atoi("nope"));
+	printf("%d\n", gm_atoi(" +7"));
+	printf("%d\n", gm_atoi("-300"));
+	printf("%d\n", gm_atoi("nope"));
 	return 0;
 } */

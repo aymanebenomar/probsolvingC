@@ -3,7 +3,7 @@
 Append one string to the end of another
 
 ```c
-char *strcat(char *dst, const char *src)
+char *gm_strcat(char *dst, const char *src)
 ```
 
 **Difficulty:** 3/5
