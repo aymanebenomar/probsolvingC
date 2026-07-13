@@ -1,6 +1,6 @@
 #include <stddef.h>
 
-void	*memcpy(void *dst, const void *src, size_t n)
+void	*gm_memcpy(void *dst, const void *src, size_t n)
 {
 	unsigned const char 	*source = src;
 	unsigned char 	*dest = dst;
@@ -19,7 +19,7 @@ void	*memcpy(void *dst, const void *src, size_t n)
 int main(void)
 {
 	char dst[20];
-	memcpy(dst, "rebase --hard", 4);
+	gm_memcpy(dst, "rebase --hard", 4);
 	printf("%s", dst);
 	return 0;
 } */
