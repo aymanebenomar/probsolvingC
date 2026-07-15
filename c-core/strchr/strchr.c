@@ -1,4 +1,4 @@
-char	*strchr(const char *s, int c)
+char	*gm_strchr(const char *s, int c)
 {
 	int i = 0;
 	while(1)
