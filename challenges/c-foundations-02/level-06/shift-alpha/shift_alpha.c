@@ -2,26 +2,24 @@
 
 int	main(int argc, char **argv)
 {
-	int i = 0;
-	char c;
-	if (argc == 2)
+	if (argc != 2)
+		write(1, "wrong number of arguments", 25);
+	else
 	{
-		while (argv[1][i])
+		char c;
+		while(*argv[1])
 		{
-			c = argv[1][i];
-			if ((c >= 'a' && c < 'z') || (c >= 'A' && c < 'Z'))
-				c = argv[1][i] + 1;
-			else if (argv[1][i] == 'z')
+			c = *argv[1];
+			if (c == 'z')
 				c = 'a';
-			else if (argv[1][i] == 'Z')
+			else if (c == 'Z')
 				c = 'A';
+			else if ((c >= 'a' && c < 'z') || (c >= 'A' && c < 'Z'))
+				c++;
 			write(1, &c, 1);
-			i++;
+			argv[1]++;
 		}
-		write(1, "\n", 1);
 	}
-	else {
-		write(1, "wrong number of arguments\n", 26);
-	}
+	write(1, "\n", 1);
 	return (0);
 }
