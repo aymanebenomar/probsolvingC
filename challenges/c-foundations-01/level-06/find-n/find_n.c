@@ -2,27 +2,20 @@
 
 int	main(int argc, char **argv)
 {
-	(void)argc;
-	(void)argv;
-
-	int i = 0;
 	if (argc == 2)
 	{
-		while (argv[1][i])
+		while (*argv[1])
 		{
-			if (argv[1][i] == 'n')
+			if (*argv[1] == 'n')
 			{
-				write(1, &argv[1][i], 1);
-				write(1, "\n", 1);
+				write(1, "n\n", 2);
 				return 0;
 			}
-			i++;
-		}		
+			argv[1]++;
+		}
+		write(1, "\n", 1);
 	}
-	else 
-	{
-		write(1, "wrong number of arguments", 25);
-	}
-	write (1, "\n", 1);
+	else
+		write(1, "wrong number of arguments\n", 26);
 	return (0);
 }
