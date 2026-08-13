@@ -4,21 +4,20 @@ int	main(int argc, char **argv)
 {
 	(void)argc;
 	(void)argv;
-
 	char alpha = 'a';
 	char c;
-	int count;
+	int times;
 
 	while (alpha <= 'z')
 	{
-		count = 2;
+		times = 2;
 		c = alpha;
-		if (alpha % 2 == 0)
+		if (c % 2 == 0)
 			c -= 32;
-		while (count > 0)
+		while (times > 0)
 		{
 			write(1, &c, 1);
-			count--;
+			times--;
 		}
 		alpha++;
 	}

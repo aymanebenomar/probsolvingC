@@ -2,9 +2,7 @@
 
 int	putchar(int c)
 {
-	unsigned char byte;
-
-	byte = (unsigned char)c;
-	write(1, &byte, 1);
+	char al = (unsigned char)c;
+	write(1, &al, 1);
 	return (c);
 }
