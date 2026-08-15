@@ -2,35 +2,39 @@
 
 int	main(int argc, char **argv)
 {
-	int i = 0;
-	int count;
-	if (argc == 2)
+	if (argc != 2)
+		write(1, "wrong number of arguments", 25);
+	else
 	{
-		while(argv[1][i])
+		int count;
+		char c;
+		while (*argv[1])
 		{
+			c = *argv[1];
 			count = 0;
-			if (argv[1][i] >= 'a' && argv[1][i] <= 'z')
+			if (c >= 'a' && c <= 'z')
 			{
-				count = argv[1][i] - 'a';
+				count = (c - 'a');
+				while (count > 0)
+				{
+					write(1, &c, 1);
+					count--;
+				}
 			}
-			else if (argv[1][i] >= 'A' && argv[1][i] <= 'Z')
+			else if (c >= 'A' && c <= 'Z')
 			{
-				count = argv[1][i] - 'A';
+				count = (c - 'A');
+				while (count > 0)
+				{
+					write(1, &c, 1);
+					count--;
+				}
 			}
-			else {
-				write(1, &argv[1][i], 1);
-			}
-			while (count > 0)
-			{
-				write(1, &argv[1][i], 1);
-				count--;
-			}
-			i++;
+			else
+				write(1, &c, 1);
+			argv[1]++;
 		}
-		write(1, "\n", 1);
 	}
-	else {
-		write(1, "wrong number of arguments\n", 26);
-	}
-	return 0;
+	write(1, "\n", 1);
+	return (0);
 }

@@ -1,14 +1,12 @@
 char	*strcpy(char *dst, const char *src)
 {
-	char *s = dst;
-	
+	char *p = dst;
 	while (*src)
 	{
 		*dst = *src;
-		src++;
 		dst++;
+		src++;
 	}
-
 	*dst = '\0';
-	return (s);
+	return (p);
 }

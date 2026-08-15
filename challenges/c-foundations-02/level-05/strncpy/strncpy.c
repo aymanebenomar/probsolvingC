@@ -2,16 +2,28 @@
 
 char	*strncpy(char *dst, const char *src, size_t n)
 {
-	unsigned int i = 0;
-	while (src[i] && i < n)
+	size_t i = 0;
+	int len = 0;
+
+	if (n == 0)
+		return (dst);
+
+	while (src[len])
+		len++;
+		
+	char *d = dst;
+	while (*src && i < n)
 	{
-		dst[i] = src[i];
+		*dst = *src;
+		dst++;
+		src++;
 		i++;
 	}
 	while (i < n)
 	{
-		dst[i] = '\0';
+		*dst = '\0';
+		dst++;
 		i++;
 	}
-	return (dst);
+	return (d);
 }
