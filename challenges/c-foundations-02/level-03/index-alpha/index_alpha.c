@@ -6,35 +6,29 @@ int	main(int argc, char **argv)
 		write(1, "wrong number of arguments", 25);
 	else
 	{
-		int count;
 		char c;
-		while (*argv[1])
+		int rep;
+		int i = 0;
+		while (argv[1][i])
 		{
-			c = *argv[1];
-			count = 0;
+			rep = 0;
+			c = argv[1][i];
 			if (c >= 'a' && c <= 'z')
-			{
-				count = (c - 'a');
-				while (count > 0)
-				{
-					write(1, &c, 1);
-					count--;
-				}
-			}
+				rep = c - 'a';
 			else if (c >= 'A' && c <= 'Z')
-			{
-				count = (c - 'A');
-				while (count > 0)
-				{
-					write(1, &c, 1);
-					count--;
-				}
-			}
+				rep = c - 'A';
 			else
 				write(1, &c, 1);
-			argv[1]++;
+				
+			while (rep >= 1)
+			{
+				write(1, &c, 1);
+				rep--;
+			}
+			i++;
 		}
 	}
+
 	write(1, "\n", 1);
 	return (0);
 }
