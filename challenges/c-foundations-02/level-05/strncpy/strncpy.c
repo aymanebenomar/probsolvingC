@@ -3,6 +3,7 @@
 char	*strncpy(char *dst, const char *src, size_t n)
 {
 	size_t i = 0;
+
 	while (src[i] && i < n)
 	{
 		dst[i] = src[i];

@@ -1,19 +1,20 @@
 char *rev_str(char *str)
 {
 	int i = 0;
+	int last = 0;
 	char temp;
-	int len = 0;
 
-	while (str[len])
-		len++;
-	len--;
-	while (i < len)
+	while (str[last])
+		last++;
+	last--;
+
+	while (i < last)
 	{
-		temp = str[i];
-		str[i] = str[len];
-		str[len] = temp;
+		temp = str[last];
+		str[last] = str[i];
+		str[i] = temp;
 		i++;
-		len--;
+		last--;
 	}
 	return (str);
 }
