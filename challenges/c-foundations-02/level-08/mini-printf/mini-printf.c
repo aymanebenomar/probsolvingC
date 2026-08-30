@@ -1,51 +1,58 @@
-#include <unistd.h>
 #include <stdarg.h>
+#include <stddef.h>
+#include <unistd.h>
 
-void	put_char(char c, int *count)
+static int	put_char(char c)
 {
 	write(1, &c, 1);
-	(*count)++;
+	return (1);
 }
 
-void	put_str(char *str, int *count)
+static int	put_str(const char *s)
 {
-	int	i;
+	int	len;
 
-	if (!str)
-		str = "(null)";
-	i = 0;
-	while (str[i])
+	if (!s)
+		s = "(null)";
+	len = 0;
+	while (s[len])
 	{
-		put_char(str[i], count);
-		i++;
+		write(1, &s[len], 1);
+		len++;
 	}
+	return (len);
 }
 
-void	put_nbr(int n, int *count)
+static int	put_nbr(int n)
 {
-	if (n == -2147483648)
-	{
-		put_str("-2147483648", count);
-		return;
-	}
+	unsigned int	nb;
+	int				count;
+
+	count = 0;
 	if (n < 0)
 	{
-		put_char('-', count);
-		n = -n;
+		count += put_char('-');
+		nb = 0u - (unsigned int)n;
 	}
-	if (n >= 10)
-		put_nbr(n / 10, count);
-	put_char((n % 10) + '0', count);
+	else
+		nb = (unsigned int)n;
+	if (nb >= 10)
+		count += put_nbr(nb / 10);
+	count += put_char((nb % 10) + '0');
+	return (count);
 }
 
-void	put_hex(unsigned int n, int *count)
+static int	put_hex(unsigned int n)
 {
-	char	*hex;
+	char	*base;
+	int		count;
 
-	hex = "0123456789abcdef";
+	base = "0123456789abcdef";
+	count = 0;
 	if (n >= 16)
-		put_hex(n / 16, count);
-	put_char(hex[n % 16], count);
+		count += put_hex(n / 16);
+	count += put_char(base[n % 16]);
+	return (count);
 }
 
 int	mini_printf(const char *format, ...)
@@ -54,32 +61,34 @@ int	mini_printf(const char *format, ...)
 	int		i;
 	int		count;
 
+	va_start(ap, format);
 	i = 0;
 	count = 0;
-	va_start(ap, format);
 	while (format[i])
 	{
-		if (format[i] == '%')
+		if (format[i] != '%')
+			count += put_char(format[i]);
+		else
 		{
 			i++;
 			if (format[i] == 'c')
-				put_char((char)va_arg(ap, int), &count);
+				count += put_char(va_arg(ap, int));
 			else if (format[i] == 's')
-				put_str(va_arg(ap, char *), &count);
+				count += put_str(va_arg(ap, char *));
 			else if (format[i] == 'd')
-				put_nbr(va_arg(ap, int), &count);
+				count += put_nbr(va_arg(ap, int));
 			else if (format[i] == 'x')
-				put_hex(va_arg(ap, unsigned int), &count);
+				count += put_hex(va_arg(ap, unsigned int));
 			else if (format[i] == '%')
-				put_char('%', &count);
-			else
+				count += put_char('%');
+			else if (format[i])
 			{
-				put_char('%', &count);
-				put_char(format[i], &count);
+				count += put_char('%');
+				count += put_char(format[i]);
 			}
+			else
+				count += put_char('%');
 		}
-		else
-			put_char(format[i], &count);
 		i++;
 	}
 	va_end(ap);

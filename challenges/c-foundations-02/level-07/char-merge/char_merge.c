@@ -1,31 +1,37 @@
 #include <unistd.h>
 
-int	main(int argc, char **argv)
+int	main(int ac, char **av)
 {
-	if (argc != 3)
-		write(1, "wrong number of arguments", 25);
-	else
+	if (ac != 3)
 	{
-		char seen[256] = {};
-		while (*argv[2])
-		{
-			if(seen[(unsigned char)*argv[2]] == 0)
-			{
-				write(1, argv[2], 1);
-				seen[(unsigned char)*argv[2]] = 1;
-			}
-			argv[2]++;
-		}
-		while (*argv[1])
-		{
-			if (seen[(unsigned char)*argv[1]] == 0)
-			{
-				write(1, argv[1], 1);
-				seen[(unsigned char)*argv[1]] = 1;
-			}
-			argv[1]++;
-		}
+		write (1, "wrong number of arguments\n", 26);
+		return 0;
 	}
+
+	char s[256] = {};
+	int i = 0;
+	int j = 0;
+
+	while (av[2][i])
+	{
+		if (s[(unsigned char)av[2][i]] == 0)
+		{
+			write(1, &av[2][i], 1);
+			s[(unsigned char)av[2][i]] = 1;
+		}
+		i++;
+	}
+
+	while (av[1][j])
+	{
+		if (s[(unsigned char)av[1][j]] == 0)
+		{
+			write(1, &av[1][j], 1);
+			s[(unsigned char)av[1][j]] = 1;
+		}
+		j++;
+	}
+
 	write(1, "\n", 1);
 	return (0);
 }
