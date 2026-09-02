@@ -8,9 +8,8 @@ typedef struct ListNode
 
 int	list_node_count(ListNode *head)
 {
-	int	count;
+	int count = 0;
 
-	count = 0;
 	while (head != NULL)
 	{
 		count++;
